@@ -1,8 +1,16 @@
 aid: lotame-solutions
 name: Lotame Solutions
-description: Lotame Solutions is a company surfaced as a portfolio company of battery-ventures and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Lotame Solutions is a data collaboration and identity company for digital
+  marketing and advertising. Its Spherical platform lets marketers, agencies,
+  and publishers connect, enrich, and activate first- and third-party audience
+  data, while Panorama ID delivers a privacy-first, cookieless identity for
+  addressability across web, mobile app, and CTV. Lotame exposes a token-based
+  Admin Services REST API (api.lotame.com/2/) for managing first-party data,
+  building audiences, and pulling behavior and audience statistics, plus a
+  server-side Panorama ID resolution API on sid.crwdcntrl.net for web and
+  mobile (MAID) identity lookups. Lotame operates across 24 countries and was
+  acquired by Publicis Groupe.
 url: https://raw.githubusercontent.com/api-evangelist/lotame-solutions/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,12 +18,113 @@ x-backed-by:
 - battery-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 9
+  pass: local-v1
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
+image: https://cdn-ilbibgp.nitrocdn.com/eakWUVxgVLoymIJUurpQZcwTweYHDeju/assets/images/optimized/rev-6d2d189/www.lotame.com/wp-content/uploads/2025/05/lotame-website-favicon-300x300.png
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Data Management Platform
+- Identity
+- Advertising
+- Marketing
+- Audience Data
+- Data Collaboration
+- AdTech
+apis:
+- name: Lotame Admin Services API
+  description: >-
+    Token-based REST API for managing first-party data, building and editing
+    audience segments, activating audiences, and retrieving behavior and
+    audience analytics on the Lotame Spherical platform. JSON over HTTPS with
+    GET/PUT/POST/DELETE, versioned under /2/, authenticated with x-lotame-token
+    and x-lotame-access header credentials created in the Spherical platform.
+  humanURL: https://my.lotame.com/category/administrative-api
+  baseURL: https://api.lotame.com/2/
+  properties:
+  - type: Documentation
+    url: https://api.lotame.com/docs/
+  - type: APIReference
+    url: https://my.lotame.com/t/35h37my/admin-services-api
+  - type: Authentication
+    url: authentication/lotame-solutions-authentication.yml
+  - type: Conventions
+    url: conventions/lotame-solutions-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/lotame-solutions-lifecycle.yml
+  - type: MCPServer
+    url: mcp/lotame-solutions-mcp.yml
+- name: Panorama ID Server-Side API
+  description: >-
+    Real-time server-side API that returns the assigned Panorama ID for an IP
+    address and user-agent (web) or Mobile Advertiser ID / MAID (mobile app).
+    JSON POST to sid.crwdcntrl.net/sid, identified by a Lotame-assigned static
+    client_id, with IAB TCF v2 or Lotame consent signaling required per request.
+  humanURL: https://my.lotame.com/category/panorama-id-apis
+  baseURL: https://sid.crwdcntrl.net/sid
+  properties:
+  - type: Documentation
+    url: https://my.lotame.com/t/60ykhkw/server-side-panorama-id-api-for-web
+  - type: APIReference
+    url: https://my.lotame.com/t/x2yf3d0/server-side-panorama-id-api-for-mobile-app-maids
+  - type: ErrorCatalog
+    url: errors/lotame-solutions-problem-types.yml
+common:
+- type: Website
+  url: https://www.lotame.com/
+- type: DeveloperPortal
+  url: https://my.lotame.com/
+- type: Documentation
+  url: https://api.lotame.com/docs/
+- type: APIReference
+  url: https://my.lotame.com/category/administrative-api
+- type: Support
+  url: https://www.cognitoforms.com/LotameSolutionsInc/SupportTicketForm
+- type: SignUp
+  url: https://my.lotame.com/signup
+- type: Login
+  url: https://platform.lotame.com/
+- type: Blog
+  url: https://www.lotame.com/resources
+- type: TermsOfService
+  url: https://www.lotame.com/legal/
+- type: PrivacyPolicy
+  url: https://www.lotame.com/privacy
+- type: Authentication
+  url: authentication/lotame-solutions-authentication.yml
+- type: Conventions
+  url: conventions/lotame-solutions-conventions.yml
+- type: ErrorCatalog
+  url: errors/lotame-solutions-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/lotame-solutions-lifecycle.yml
+- type: Conformance
+  url: conformance/lotame-solutions-conformance.yml
+- type: DomainSecurity
+  url: security/lotame-solutions-domain-security.yml
+- type: WellKnown
+  url: well-known/lotame-solutions-well-known.yml
+- type: MCPServer
+  url: mcp/lotame-solutions-mcp.yml
+- type: LLMsTxt
+  url: llms/lotame-solutions-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
