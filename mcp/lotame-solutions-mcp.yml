@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: derived
+source: derived from documented Lotame Admin Services API operations
+status: candidate
+name: Lotame Solutions MCP Server (candidate)
+notes: >-
+  No official hosted or remote MCP server was found for Lotame. The following is
+  a candidate tool list derived from documented Admin Services API operations to
+  guide a future MCP wrapper. Not published by Lotame.
+server:
+  official: false
+  url: null
+  transport: null
+tools:
+- name: get_active_user
+  description: Retrieve information about the authenticated user.
+  http: GET /users/activeUser
+- name: get_behavior_statistics
+  description: Retrieve statistics for a given behavior.
+  http: GET /statistics/behaviors/{behavior_id}
+- name: get_audience_statistics
+  description: Retrieve audience-level statistics.
+  http: GET /statistics/audiences
+- name: resolve_panorama_id
+  description: >-
+    Resolve a Panorama ID for an IP address and user-agent (web) or MAID
+    (mobile), with required consent signaling.
+  http: POST https://sid.crwdcntrl.net/sid

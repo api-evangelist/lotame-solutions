@@ -1,0 +1,49 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of apis.yml hosts
+name: Lotame Solutions Well-Known Index
+notes: >-
+  No well-known documents were served. www.lotame.com returns 404 for all
+  probed paths; api.lotame.com and sid.crwdcntrl.net return 403 (behind SAML /
+  access control). No files saved.
+probes:
+- host: www.lotame.com
+  path: /.well-known/security.txt
+  status: 404
+  file: null
+- host: www.lotame.com
+  path: /.well-known/openid-configuration
+  status: 404
+  file: null
+- host: www.lotame.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  file: null
+- host: www.lotame.com
+  path: /.well-known/api-catalog
+  status: 404
+  file: null
+- host: www.lotame.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+  file: null
+- host: api.lotame.com
+  path: /.well-known/security.txt
+  status: 403
+  file: null
+- host: api.lotame.com
+  path: /.well-known/openid-configuration
+  status: 403
+  file: null
+- host: api.lotame.com
+  path: /.well-known/oauth-authorization-server
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/security.txt
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/openid-configuration
+  status: 403
+  file: null

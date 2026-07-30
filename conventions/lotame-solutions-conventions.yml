@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: searched
+source: https://my.lotame.com/t/35h37my/admin-services-api + Panorama ID API docs
+name: Lotame Solutions API Conventions
+transport:
+  protocol: HTTPS only (TLS/SSL required)
+  formats:
+  - application/json
+  methods:
+  - GET
+  - PUT
+  - POST
+  - DELETE
+auth:
+  style: header-token-pair (Admin API) / body client_id (Panorama ID)
+  detail: See authentication/lotame-solutions-authentication.yml
+  cross_link: authentication/lotame-solutions-authentication.yml
+versioning:
+  style: uri-path
+  detail: >-
+    The Admin Services API pins the major version in the base path, e.g.
+    https://api.lotame.com/2/ (version 2). The Panorama ID server-side endpoint
+    is unversioned at sid.crwdcntrl.net/sid.
+errors:
+  style: http-status
+  detail: >-
+    The Admin Services API uses standard HTTP status codes (e.g. 403 Forbidden
+    for unauthorized data access). The Panorama ID API returns a JSON body with
+    an errors[] array of numeric codes and a no_consent reason string rather
+    than an HTTP error for consent failures.
+  cross_link: errors/lotame-solutions-problem-types.yml
+rate_limiting:
+  style: platform-enforced
+  detail: >-
+    Platform-level rate limits apply to the Admin Services API; contact Lotame
+    support if limits are exceeded. Panorama ID responses carry expiry_ts, a
+    millisecond epoch timestamp, and clients should not re-request the same
+    IP/user-agent combination until after that expiration.
+lifecycle_cross_link: lifecycle/lotame-solutions-lifecycle.yml
+consent:
+  framework: IAB TCF v2 or Lotame consent
+  detail: >-
+    Panorama ID requests must supply consent as either GDPR fields
+    (consent.gdpr_applies, consent.gdpr_consent as a TCF v2 string) or
+    consent.lotame_consent (boolean).

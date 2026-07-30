@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://my.lotame.com/category/panorama-id-apis + Admin Services API docs
+name: Lotame Solutions Conformance Assertions
+standards:
+- id: iab-tcf-v2
+  name: IAB Transparency & Consent Framework v2
+  conforms: true
+  evidence: >-
+    The Panorama ID server-side API accepts and enforces IAB TCF v2 consent
+    strings via consent.gdpr_consent and returns TCF-specific error codes (113)
+    and a no_consent=TCF reason.
+- id: gdpr
+  name: EU GDPR consent signaling
+  conforms: true
+  evidence: >-
+    Requests carry consent.gdpr_applies / consent.gdpr_consent; a missing
+    gdpr_consent when GDPR applies returns error 114. Lotame publishes an EU
+    ePrivacy Directive and Privacy Choice Signaling Policy.
+- id: tls
+  name: TLS / HTTPS-only transport
+  conforms: true
+  evidence: >-
+    Both APIs require HTTPS (TLS/SSL). Live probe shows TLS 1.3 on
+    api.lotame.com, www.lotame.com, and my.lotame.com.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    The Admin Services API uses a custom header token pair (x-lotame-token /
+    x-lotame-access), not OAuth 2.0.
+- id: rfc9457
+  name: RFC 9457 problem+json error format
+  conforms: false
+  evidence: >-
+    Errors use custom JSON (errors[] codes) and standard HTTP status codes, not
+    application/problem+json.

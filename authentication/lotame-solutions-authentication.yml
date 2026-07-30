@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: searched
+source: https://my.lotame.com/t/35h37my/admin-services-api + Panorama ID API docs
+name: Lotame Solutions Authentication Profile
+apis:
+- name: Lotame Admin Services API
+  baseURL: https://api.lotame.com/2/
+  schemes:
+  - type: apiKey
+    in: header
+    scheme: lotame-token-pair
+    description: >-
+      Token-pair authentication using two custom headers sent on every request:
+      x-lotame-token (the token) and x-lotame-access (the access key). Both are
+      generated in the Spherical platform under Manage API Tokens > Create Token
+      Pair.
+    headers:
+    - x-lotame-token
+    - x-lotame-access
+    docs: https://my.lotame.com/t/35h37my/admin-services-api
+    notes: >-
+      User API tokens expire after 7 days by default and can be extended to 31
+      days on request. A separate Client API token type is available for
+      automated processes with up to one-year validity. HTTPS/TLS is required;
+      unauthorized data access returns HTTP 403.
+- name: Panorama ID Server-Side API
+  baseURL: https://sid.crwdcntrl.net/sid
+  schemes:
+  - type: apiKey
+    in: body
+    scheme: client_id
+    description: >-
+      Requests are identified by a static integer client_id assigned by Lotame
+      and passed in the JSON request body. No bearer token or API key header is
+      required; per-request IAB TCF v2 or Lotame consent signaling is mandatory.
+    docs: https://my.lotame.com/t/60ykhkw/server-side-panorama-id-api-for-web

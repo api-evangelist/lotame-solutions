@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: searched
+source: https://my.lotame.com/t/35h37my/admin-services-api
+name: Lotame Solutions API Lifecycle
+versioning:
+  scheme: uri-path-major
+  current: '2'
+  detail: >-
+    The Admin Services API is served under a major-version path segment,
+    currently /2/ at https://api.lotame.com/2/. The Panorama ID server-side
+    endpoint (sid.crwdcntrl.net/sid) is unversioned.
+credentials:
+  token_expiration:
+    user_api_token_default_days: 7
+    user_api_token_max_days: 31
+    client_api_token: up to one-year validity for automated processes
+  detail: >-
+    User API tokens expire after 7 days by default and can be extended to 31
+    days on request. Client API tokens are longer-lived (up to a year) and
+    intended for automated / server-to-server processes.
+deprecation:
+  policy: none-published
+  sunset_header: unknown
+  detail: >-
+    No public deprecation policy, Sunset/Deprecation (RFC 8594) header usage, or
+    dated end-of-life schedule was found in the documentation.
+status_page:
+  url: null
+  detail: No public status/uptime page was found for Lotame.
+sla:
+  detail: >-
+    SLA terms are governed by the Master Services Agreement rather than a public
+    document. See https://www.lotame.com/legal/.

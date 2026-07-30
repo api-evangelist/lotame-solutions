@@ -1,0 +1,42 @@
+generated: '2026-07-20'
+method: searched
+source: https://my.lotame.com/t/60ykhkw/server-side-panorama-id-api-for-web
+name: Lotame Solutions Error Catalog
+format: custom-json
+notes: >-
+  The Panorama ID server-side API does not use RFC 9457 problem+json. It returns
+  a JSON body containing an errors[] array of numeric codes plus a no_consent
+  reason string. The Admin Services API relies on standard HTTP status codes.
+apis:
+- name: Panorama ID Server-Side API
+  envelope:
+    error_field: errors
+    consent_field: no_consent
+  problem_types:
+  - code: 110
+    title: Request error
+    detail: Generic request-level error returned in the errors[] array.
+  - code: 111
+    title: Consent policy violation
+    detail: The supplied consent does not satisfy Lotame consent policy.
+  - code: 112
+    title: Request error
+    detail: Request could not be processed as submitted.
+  - code: 113
+    title: TCF missing required purpose
+    detail: The TCF v2 consent string is missing a required purpose.
+  - code: 114
+    title: gdpr_consent not supplied
+    detail: gdpr_consent was not provided when GDPR applies and it is required.
+  no_consent_reasons:
+  - TCF
+  - LOTAME_ACTIVE_CONSENT
+  - NO_CORE_CONSENT
+- name: Lotame Admin Services API
+  problem_types:
+  - code: 403
+    title: Forbidden
+    detail: Unauthorized data access; the token pair lacks rights to the resource.
+    remediation: >-
+      Verify x-lotame-token / x-lotame-access are valid and unexpired and that
+      the user has access to the requested data.

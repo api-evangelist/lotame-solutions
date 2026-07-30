@@ -1,0 +1,29 @@
+# Lotame Solutions
+
+> Data collaboration and identity company for digital marketing and advertising. The Spherical platform connects, enriches, and activates first- and third-party audience data, and Panorama ID provides a privacy-first, cookieless identity for addressability across web, mobile app, and CTV. Acquired by Publicis Groupe; operates in 24 countries.
+
+## APIs
+
+- [Lotame Admin Services API](https://my.lotame.com/t/35h37my/admin-services-api): Token-based REST API (base https://api.lotame.com/2/) for managing first-party data, building and activating audience segments, and pulling behavior and audience statistics. JSON over HTTPS; GET/PUT/POST/DELETE; authenticated with x-lotame-token and x-lotame-access header credentials.
+- [Panorama ID Server-Side API — Web](https://my.lotame.com/t/60ykhkw/server-side-panorama-id-api-for-web): Real-time POST to https://sid.crwdcntrl.net/sid returning a Panorama ID for an IP address and user-agent, identified by a static client_id with IAB TCF v2 or Lotame consent.
+- [Panorama ID Server-Side API — Mobile (MAIDs)](https://my.lotame.com/t/x2yf3d0/server-side-panorama-id-api-for-mobile-app-maids): Same server-side endpoint resolving a Panorama ID for a Mobile Advertiser ID (MAID).
+
+## Authentication
+
+- Admin Services API: token-pair headers x-lotame-token + x-lotame-access, created in Spherical under Manage API Tokens. User tokens expire after 7 days (extendable to 31); Client API tokens last up to a year.
+- Panorama ID API: static integer client_id in the JSON body; per-request consent (GDPR/TCF v2 or lotame_consent) required.
+
+## Documentation
+
+- [API Explorer / Swagger](https://api.lotame.com/docs/): Interactive API reference (login required).
+- [Administrative API docs](https://my.lotame.com/category/administrative-api)
+- [Panorama ID API docs](https://my.lotame.com/category/panorama-id-apis)
+- [Knowledge Base](https://my.lotame.com/)
+
+## Company
+
+- [Website](https://www.lotame.com/)
+- [Resources / Blog](https://www.lotame.com/resources)
+- [Legal](https://www.lotame.com/legal/)
+- [Privacy Center](https://www.lotame.com/privacy)
+- [Support](https://www.cognitoforms.com/LotameSolutionsInc/SupportTicketForm)
