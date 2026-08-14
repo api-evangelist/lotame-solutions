@@ -19,9 +19,9 @@ x-backed-by:
 x-tier: stub
 x-tier-reason: portfolio-lead
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 9
+  artifacts_added: 5
   pass: local-v1
 accessModel:
   pricing: unknown
@@ -38,7 +38,7 @@ accessModel:
 specificationVersion: '0.20'
 image: https://cdn-ilbibgp.nitrocdn.com/eakWUVxgVLoymIJUurpQZcwTweYHDeju/assets/images/optimized/rev-6d2d189/www.lotame.com/wp-content/uploads/2025/05/lotame-website-favicon-300x300.png
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-13'
 tags:
 - Company
 - Data Management Platform
@@ -71,6 +71,10 @@ apis:
     url: lifecycle/lotame-solutions-lifecycle.yml
   - type: MCPServer
     url: mcp/lotame-solutions-mcp.yml
+  - type: DataModel
+    url: data-model/lotame-solutions-data-model.yml
+  - type: RateLimits
+    url: rate-limits/lotame-solutions-rate-limits.yml
 - name: Panorama ID Server-Side API
   description: >-
     Real-time server-side API that returns the assigned Panorama ID for an IP
@@ -119,12 +123,28 @@ common:
   url: conformance/lotame-solutions-conformance.yml
 - type: DomainSecurity
   url: security/lotame-solutions-domain-security.yml
-- type: WellKnown
-  url: well-known/lotame-solutions-well-known.yml
 - type: MCPServer
   url: mcp/lotame-solutions-mcp.yml
 - type: LLMsTxt
   url: llms/lotame-solutions-llms.txt
+- type: Packages
+  url: packages/lotame-solutions-packages.yml
+- type: SDKs
+  url: packages/lotame-solutions-packages.yml
+- type: Components
+  url: components/lotame-solutions-components.yml
+- type: DataModel
+  url: data-model/lotame-solutions-data-model.yml
+- type: Plans
+  url: plans/lotame-solutions-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/lotame-solutions-rate-limits.yml
+- type: Compliance
+  url: https://www.lotame.com/legal/eu-privacy-consent-policy
+- type: GitHubOrganization
+  url: https://github.com/Lotame
+- type: SourceCode
+  url: https://github.com/Lotame/api-examples
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
