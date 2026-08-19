@@ -1,11 +1,22 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: probed
-source: live HTTP probes of apis.yml hosts
+source: live HTTP probes of every apis.yml, docs and tag host
 name: Lotame Solutions Well-Known Index
+result: none
 notes: >-
-  No well-known documents were served. www.lotame.com returns 404 for all
-  probed paths; api.lotame.com and sid.crwdcntrl.net return 403 (behind SAML /
-  access control). No files saved.
+  NO well-known document is served on ANY Lotame host. 48 probes across six
+  hosts returned zero real documents, so this file records a verified ABSENCE
+  and NO WellKnown pointer is emitted in apis.yml (a prior round emitted one in
+  error). Three distinct failure modes were observed:
+  (1) www.lotame.com and my.lotame.com return an honest 404 on every path;
+  (2) api.lotame.com, sid.crwdcntrl.net and tags.crwdcntrl.net return 403
+  Forbidden on every path — the edge refuses unauthenticated requests outright;
+  (3) platform.lotame.com returns HTTP 200 for EVERY /.well-known/* path, but
+  the body is the Spherical single-page-application HTML shell
+  (content-type text/html, `<!DOCTYPE html>`, selfContainedApp.css) — an SPA
+  catch-all, not a document. Those 200s are recorded as misses, including
+  /.well-known/agent-card.json and /.well-known/agent.json, and no A2A agent
+  card artifact was written.
 probes:
 - host: www.lotame.com
   path: /.well-known/security.txt
@@ -20,11 +31,55 @@ probes:
   status: 404
   file: null
 - host: www.lotame.com
+  path: /.well-known/oauth-protected-resource
+  status: 404
+  file: null
+- host: www.lotame.com
   path: /.well-known/api-catalog
   status: 404
   file: null
 - host: www.lotame.com
   path: /.well-known/ai-plugin.json
+  status: 404
+  file: null
+- host: www.lotame.com
+  path: /.well-known/agent-card.json
+  status: 404
+  file: null
+- host: www.lotame.com
+  path: /.well-known/agent.json
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/security.txt
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/openid-configuration
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/oauth-protected-resource
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/api-catalog
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/agent-card.json
+  status: 404
+  file: null
+- host: my.lotame.com
+  path: /.well-known/agent.json
   status: 404
   file: null
 - host: api.lotame.com
@@ -39,6 +94,26 @@ probes:
   path: /.well-known/oauth-authorization-server
   status: 403
   file: null
+- host: api.lotame.com
+  path: /.well-known/oauth-protected-resource
+  status: 403
+  file: null
+- host: api.lotame.com
+  path: /.well-known/api-catalog
+  status: 403
+  file: null
+- host: api.lotame.com
+  path: /.well-known/ai-plugin.json
+  status: 403
+  file: null
+- host: api.lotame.com
+  path: /.well-known/agent-card.json
+  status: 403
+  file: null
+- host: api.lotame.com
+  path: /.well-known/agent.json
+  status: 403
+  file: null
 - host: sid.crwdcntrl.net
   path: /.well-known/security.txt
   status: 403
@@ -47,3 +122,110 @@ probes:
   path: /.well-known/openid-configuration
   status: 403
   file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/oauth-authorization-server
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/oauth-protected-resource
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/api-catalog
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/ai-plugin.json
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/agent-card.json
+  status: 403
+  file: null
+- host: sid.crwdcntrl.net
+  path: /.well-known/agent.json
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/security.txt
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/openid-configuration
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/oauth-authorization-server
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/oauth-protected-resource
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/api-catalog
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/ai-plugin.json
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/agent-card.json
+  status: 403
+  file: null
+- host: tags.crwdcntrl.net
+  path: /.well-known/agent.json
+  status: 403
+  file: null
+- host: platform.lotame.com
+  path: /.well-known/security.txt
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — text/html Spherical app shell, not a security.txt.
+- host: platform.lotame.com
+  path: /.well-known/openid-configuration
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — text/html Spherical app shell, not JSON metadata.
+- host: platform.lotame.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — text/html Spherical app shell.
+- host: platform.lotame.com
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — text/html Spherical app shell.
+- host: platform.lotame.com
+  path: /.well-known/api-catalog
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — text/html Spherical app shell.
+- host: platform.lotame.com
+  path: /.well-known/ai-plugin.json
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — text/html Spherical app shell.
+- host: platform.lotame.com
+  path: /.well-known/agent-card.json
+  status: 200
+  file: null
+  hit: false
+  note: >-
+    SPA catch-all — text/html Spherical app shell, NOT an A2A AgentCard. Body
+    does not parse as JSON and carries none of name/url/version/protocolVersion/
+    capabilities/skills. No agent card artifact written.
+- host: platform.lotame.com
+  path: /.well-known/agent.json
+  status: 200
+  file: null
+  hit: false
+  note: SPA catch-all — same HTML shell on the pre-0.3 legacy path.

@@ -1,0 +1,40 @@
+generated: '2026-08-13'
+method: searched
+source: https://my.lotame.com/t/35h37my/admin-services-api
+name: Lotame Solutions Rate Limits
+limit_count: 0
+limits: []
+note: >-
+  Lotame CONFIRMS that rate limits exist but publishes no numbers. The Admin
+  Services API article states verbatim: "There are limits in place on api
+  endpoints to ensure platform stability. Submit a Support ticket form through
+  this link if you believe you are hitting platform limits." No quota, window,
+  burst, per-key vs per-account scope, response header, or exhaustion status
+  code is documented anywhere in the knowledge base, and the Swagger explorer at
+  https://api.lotame.com/docs/ that might carry them is behind SAML
+  authentication. An integrator therefore has no runtime signal to back off on
+  and no documented number to design against — the only published remedy is a
+  human support ticket. Recorded as an honest zero, not an absence of checking.
+headers:
+  documented: false
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is documented for either
+    the Admin Services API or the Panorama ID server-side API.
+exhaustion_status: unknown
+remedy:
+  type: support-ticket
+  url: https://www.cognitoforms.com/LotameSolutionsInc/SupportTicketForm
+related_throttling:
+- api: Panorama ID Server-Side API
+  mechanism: response-driven caching
+  detail: >-
+    Not a rate limit, but the closest published pacing signal: Panorama ID
+    responses carry expiry_ts, a millisecond epoch timestamp, and clients are
+    instructed not to re-request the same IP / user-agent combination until
+    after that expiration.
+evidence:
+- url: https://my.lotame.com/t/35h37my/admin-services-api
+  status: 200
+- url: https://api.lotame.com/docs/
+  status: 302
+  detail: Redirects to https://api.lotame.com/saml2/authenticate/Lotame

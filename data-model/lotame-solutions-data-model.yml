@@ -1,0 +1,227 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  Derived from first-party Lotame example code at
+  https://github.com/Lotame/api-examples (py/*.py, py/better_lotameapi.py) and
+  https://github.com/Lotame/DataStream_Cookbook (Recipes/lib/Lotame.py), plus
+  https://my.lotame.com/t/35h37my/admin-services-api. NOT derived from an
+  OpenAPI — Lotame's Swagger explorer at https://api.lotame.com/docs/ is behind
+  SAML authentication, so no machine-readable contract was available.
+name: Lotame Admin Services API Data Model
+api: Lotame Admin Services API
+base: https://api.lotame.com/2/
+confidence: medium
+notes: >-
+  Entities, fields and paths below appear verbatim in Lotame's own published
+  example scripts and knowledge-base articles. Field lists are NOT exhaustive:
+  they are only what the first-party examples actually send or read. No
+  invented properties. Cardinalities are inferred from the request/response
+  shapes those examples build.
+entities:
+- name: Client
+  description: >-
+    The Lotame account that owns behaviors, audiences and hierarchies. Every
+    create call carries a clientId.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+    source: audience_creation_example.py, lotame.properties (client_id)
+  paths: []
+- name: Behavior
+  description: >-
+    A unit of collected or inferred consumer signal (interest, action, segment,
+    measurement) that audiences are built from.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  - name: name
+    type: string
+  - name: description
+    type: string
+  - name: clientId
+    type: integer
+  - name: behaviorTypeId
+    type: integer
+    note: >-
+      Behavior type; the Lightning Tag docs name the collection types int, med,
+      act and seg.
+  - name: aliases
+    type: array
+    via: behaviors/{behavior_id}/aliases
+  paths:
+  - GET /behaviors
+  - GET /behaviors?use_aliases=true
+  - POST /behaviors?use_aliases=true
+  - GET /behaviors/{behavior_id}
+  - GET /behaviors/ignored
+  - PUT /behaviors/{behavior_id}/aliases
+- name: Audience
+  description: >-
+    A named, definable set of profiles built from a boolean composition of
+    behaviors, optionally with recency and frequency qualifiers.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  - name: name
+    type: string
+  - name: clientId
+    type: integer
+  - name: overlapOnly
+    type: boolean
+    note: true = My Profiles, false = All Profiles.
+  - name: generate_apr
+    type: boolean
+    note: Enable Audience Profile Report generation.
+  - name: definition
+    type: object
+    note: '{ component: [ AudienceBehaviorDefinition ] }'
+  paths:
+  - GET /audiences
+  - POST /audiences
+  - GET /audiences/{audience_id}
+  - PUT /audiences/{audience_id}
+- name: AudienceBehaviorDefinition
+  description: >-
+    One clause of an audience definition — a behavior plus the boolean operator
+    relating it to the preceding clause, plus optional recency/frequency.
+  fields:
+  - name: operator
+    type: string
+    note: AND or OR, uppercase; lowercase returns HTTP 500 per Lotame's own example comment.
+  - name: complexAudienceBehavior
+    type: object
+    note: '{ behavior: { id } }'
+  - name: recency
+    type: integer
+    note: In days.
+  - name: frequency
+    type: integer
+  paths: []
+- name: Hierarchy
+  description: >-
+    A taxonomy tree used to categorize behaviors; owned by a client and made of
+    nodes.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  - name: ownerId
+    type: integer
+  paths:
+  - GET /hierarchies/{hierarchy_id}/nodes?depth=2
+- name: Node
+  description: A category node inside a hierarchy, holding categorized behaviors.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  paths:
+  - GET /hierarchies/nodes/
+  - GET /hierarchies/nodes/{node_id}/categorizedBehaviors
+  - PUT /hierarchies/nodes/{node_id}/categorizedBehaviors
+- name: Pixel
+  description: A collection pixel that can be paused or deleted.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  paths:
+  - GET /pixels/{pixel_id}
+  - PUT /pixels/{pixel_id}
+  - DELETE /pixels/{pixel_id}
+- name: Campaign
+  description: A measured campaign that carries interactions and statistics.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  paths:
+  - GET /campaigns/{campaign_id}
+- name: CampaignInteraction
+  description: An interaction event definition attached to a campaign.
+  identifier: id
+  fields:
+  - name: id
+    type: integer
+  paths:
+  - GET /campaigns/{campaign_id}/interactions
+  - POST /campaigns/{campaign_id}/interactions
+  - DELETE /campaigns/{campaign_id}/interactions/{interaction_id}
+- name: Statistics
+  description: Aggregated uniques and reach for behaviors and audiences.
+  paths:
+  - GET /statistics/behaviors/{behavior_id}
+  - GET /statistics/behaviors/{behavior_id}/aggregated
+  - GET /statistics/audiences
+- name: Report
+  description: >-
+    Audience Profile Report (APR) and publisher contribution reporting for an
+    audience.
+  paths:
+  - GET /reports/audiences/{audience_id}/profile/type/6
+  - GET /reports/audiences/{audience_id}/publisher
+- name: User
+  description: The authenticated API user behind the token pair.
+  paths:
+  - GET /users/activeUser
+relationships:
+- from: Client
+  to: Behavior
+  type: has_many
+  via: clientId
+- from: Client
+  to: Audience
+  type: has_many
+  via: clientId
+- from: Client
+  to: Hierarchy
+  type: has_many
+  via: ownerId
+- from: Audience
+  to: AudienceBehaviorDefinition
+  type: has_many
+  via: definition.component
+- from: AudienceBehaviorDefinition
+  to: Behavior
+  type: belongs_to
+  via: complexAudienceBehavior.behavior.id
+- from: Hierarchy
+  to: Node
+  type: has_many
+  via: hierarchies/{hierarchy_id}/nodes
+- from: Node
+  to: Behavior
+  type: has_many
+  via: hierarchies/nodes/{node_id}/categorizedBehaviors
+- from: Campaign
+  to: CampaignInteraction
+  type: has_many
+  via: campaigns/{campaign_id}/interactions
+- from: Audience
+  to: Report
+  type: has_many
+  via: reports/audiences/{audience_id}
+- from: Behavior
+  to: Statistics
+  type: has_one
+  via: statistics/behaviors/{behavior_id}
+related:
+- name: Panorama ID
+  description: >-
+    Lotame's cookieless people-based identifier, resolved outside the Admin
+    Services API by the server-side Panorama ID API (sid.crwdcntrl.net/sid) and
+    read client-side via the Lightning Tag getPanorama() object (getId /
+    getIdType).
+- name: Profile ID
+  description: >-
+    Lotame's device-level identifier, exposed client-side by the Lightning Tag
+    and Sync.js getProfileId().
+- name: Data Stream
+  description: >-
+    Bulk file delivery (hourly first-party log files, enrichment, geo, and a
+    device-ID mapping file across 20+ partners) rather than a REST resource;
+    file updates are discovered through a FirehoseService.getUpdates(hours=...)
+    call in Lotame's DataStream_Cookbook library.

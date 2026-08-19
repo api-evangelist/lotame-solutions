@@ -1,37 +1,124 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://my.lotame.com/category/panorama-id-apis + Admin Services API docs
+source: >-
+  https://my.lotame.com/category/panorama-id-apis +
+  https://my.lotame.com/t/35h37my/admin-services-api +
+  https://my.lotame.com/category/prebid-google-esp-amazon-cxm +
+  https://my.lotame.com/t/x2yzztf/user-id-syncing-with-sync-js-active-consent-guide +
+  https://www.lotame.com/legal/
 name: Lotame Solutions Conformance Assertions
 standards:
 - id: iab-tcf-v2
-  name: IAB Transparency & Consent Framework v2
+  name: IAB Transparency & Consent Framework v2 (v2.3)
   conforms: true
   evidence: >-
     The Panorama ID server-side API accepts and enforces IAB TCF v2 consent
     strings via consent.gdpr_consent and returns TCF-specific error codes (113)
-    and a no_consent=TCF reason.
+    and a no_consent=TCF reason. The Sync.js consent guide documents TCF 2.3
+    alongside Lotame Active Consent as the two supported consent methods.
 - id: gdpr
   name: EU GDPR consent signaling
   conforms: true
   evidence: >-
     Requests carry consent.gdpr_applies / consent.gdpr_consent; a missing
     gdpr_consent when GDPR applies returns error 114. Lotame publishes an EU
-    ePrivacy Directive and Privacy Choice Signaling Policy.
+    ePrivacy Directive and Privacy Choice Signaling Policy at
+    https://www.lotame.com/legal/eu-privacy-consent-policy.
+- id: gpc
+  name: Global Privacy Control
+  conforms: true
+  evidence: >-
+    The Lightning Tag exposes a documented `gpc` boolean configuration option
+    for handling the Global Privacy Control signal
+    (https://my.lotame.com/t/g9hxvnw/lt-js-detailed-reference-guide).
+- id: prebid-userid-module
+  name: Prebid.js User ID module (Panorama ID)
+  conforms: true
+  evidence: >-
+    Panorama ID is distributed as a Prebid.js user ID module under published
+    Prebid.org Panorama ID Enrollment Terms (2024.11), documented at
+    https://my.lotame.com/category/prebid-google-esp-amazon-cxm. Lotame also
+    maintains forks of Prebid.js and prebid.github.io in its GitHub
+    organization.
+- id: google-esp
+  name: Google Encrypted Signals for Publishers
+  conforms: true
+  evidence: >-
+    Panorama ID is supported as a Google ESP signal, documented in the Lotame
+    knowledge base category "Lotame Panorama ID—Prebid, Google ESP & Amazon
+    CxM".
+- id: amazon-cxm
+  name: Amazon CxM (Connections Marketplace) identity enrollment
+  conforms: true
+  evidence: >-
+    Published Amazon CxM Panorama ID Enrollment Terms (2024.11) at
+    https://www.lotame.com/wp-content/uploads/2024/11/2024.11.04_Amazon-CxM-Panorama-ID-Enrollment-Terms_lotame.pdf.
+- id: saml2
+  name: SAML 2.0 single sign-on
+  conforms: true
+  evidence: >-
+    Lotame publishes an SSO documentation category
+    (https://my.lotame.com/category/sso), and api.lotame.com redirects every
+    unauthenticated request to https://api.lotame.com/saml2/authenticate/Lotame
+    — an observed SAML 2.0 authentication endpoint on the API host itself.
 - id: tls
   name: TLS / HTTPS-only transport
   conforms: true
   evidence: >-
     Both APIs require HTTPS (TLS/SSL). Live probe shows TLS 1.3 on
-    api.lotame.com, www.lotame.com, and my.lotame.com.
+    api.lotame.com, www.lotame.com and my.lotame.com, with HSTS
+    (max-age=31536000; includeSubDomains) on api.lotame.com and
+    platform.lotame.com.
 - id: oauth2
   name: OAuth 2.0
   conforms: false
   evidence: >-
     The Admin Services API uses a custom header token pair (x-lotame-token /
-    x-lotame-access), not OAuth 2.0.
+    x-lotame-access), not OAuth 2.0. No /.well-known/oauth-authorization-server
+    or /.well-known/oauth-protected-resource document is served on any Lotame
+    host.
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: >-
+    No /.well-known/openid-configuration document is served on any Lotame host;
+    platform.lotame.com answers 200 with an SPA HTML shell, not JSON metadata.
 - id: rfc9457
   name: RFC 9457 problem+json error format
   conforms: false
   evidence: >-
     Errors use custom JSON (errors[] codes) and standard HTTP status codes, not
     application/problem+json.
+- id: openapi
+  name: OpenAPI / machine-readable contract
+  conforms: false
+  evidence: >-
+    Lotame runs a Swagger API Explorer at https://api.lotame.com/docs/, but
+    every unauthenticated request for the document — /docs/, /swagger.json,
+    /openapi.json, /2/swagger.json, /2/openapi.json, /api-docs — returns either
+    403 Forbidden or a 302 to
+    https://api.lotame.com/saml2/authenticate/Lotame. No OpenAPI or Swagger
+    definition is publicly retrievable.
+- id: rfc8594
+  name: RFC 8594 Sunset header / deprecation signaling
+  conforms: false
+  evidence: >-
+    No deprecation policy, Sunset or Deprecation header usage, or dated
+    end-of-life schedule is published.
+- id: rfc9116
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt returns 404 on www.lotame.com and my.lotame.com,
+    403 on api.lotame.com, sid.crwdcntrl.net and tags.crwdcntrl.net, and an SPA
+    HTML shell on platform.lotame.com. No vulnerability disclosure policy or
+    bug-bounty program was found.
+- id: soc2-iso27001
+  name: Published security certification (SOC 2 / ISO 27001)
+  conforms: false
+  evidence: >-
+    No trust center, certification page or named audit report is published.
+    https://www.lotame.com/security/ and https://www.lotame.com/trust/ return
+    404 and trust.lotame.com does not resolve; https://www.lotame.com/legal/
+    lists only the MSA, Managed Service Terms, enrollment terms, the EU privacy
+    policy and a legal glossary.

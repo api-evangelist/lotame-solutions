@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://my.lotame.com/t/83hxvnt/lt-js-basic-implementation +
+  https://my.lotame.com/t/g9hxvnw/lt-js-detailed-reference-guide +
+  https://my.lotame.com/t/m1hthxq/user-id-syncing-with-sync-js-developer-guide
+name: Lotame Solutions Client-Side Components
+notes: >-
+  Lotame's primary developer surface for publishers and marketers is not a REST
+  SDK — it is a pair of embeddable first-party JavaScript tags served from
+  tags.crwdcntrl.net (AWS CloudFront). Both are loaded per-customer by client ID
+  and are dynamically generated for that implementation, so neither carries a
+  version in its URL. Lotame's docs explicitly instruct implementers to source
+  the tag directly from Lotame's server rather than through a tag manager.
+families:
+- family: Lightning Tag (LT.js)
+  kind: embeddable-script
+  purpose: >-
+    Browser data collection into the Spherical platform: sends behaviors, sets
+    identity, reads audience membership back out, and exposes the Panorama ID.
+  docs: https://my.lotame.com/category/lightning-tag
+  loader:
+    tag: <script async src="https://tags.crwdcntrl.net/lt/c/<lotameClientId>/lt.min.js"></script>
+    host: tags.crwdcntrl.net
+    cdn: AWS CloudFront
+    versioned: false
+  namespace: window['lotame_' + lotameConfig.clientId]
+  queue: cmd
+  config_options:
+  - name: clientId
+    type: int
+    required: true
+  - name: onProfileReady
+    type: function
+  - name: onTagReady
+    type: function
+  - name: audienceLocalStorage
+    type: boolean|string
+  - name: autoRun
+    type: boolean
+  - name: gpc
+    type: boolean
+    note: Global Privacy Control signal handling.
+  methods:
+  - name: collect
+    signature: collect({data})
+    description: Pass data to the Spherical platform after the tag has loaded.
+  - name: page
+    signature: page({data})
+    description: Re-run the targeting call without reloading the tag script.
+  - name: setIdentity
+    signature: setIdentity({id, type})
+    description: Supply a user identifier; documented types are EMAIL and EMAIL_SHA256.
+  - name: getPanorama
+    description: Returns the Panorama ID object (getId / getIdType).
+  - name: getAudiences
+    signature: getAudiences([limit])
+    description: Read audience membership from localStorage.
+  - name: setUserConsent
+    signature: setUserConsent({lotameConsent})
+    description: Communicate Lotame Active Consent status.
+  profile_object:
+  - getProfileId()
+  - getPanorama()
+  - getThirdParty(namespace)
+  - getAudienceString([delimiter], [limit])
+  - getAudiences([limit])
+  data_object_fields:
+  - behaviorIds
+  - behaviors
+  - ruleBuilder
+  - thirdParty
+  runtime_hosts:
+  - https://bcp.crwdcntrl.net
+  - https://c.ltmsphrcl.net
+  - https://bcp.st.crwdcntrl.net
+  - https://c.st.ltmsphrcl.net
+- family: Sync.js
+  kind: embeddable-script
+  purpose: >-
+    Lightweight user ID syncing across browsers; matches partner and customer
+    identifiers into Spherical and exposes the resulting profile and Panorama
+    ID.
+  docs: https://my.lotame.com/category/lotame-syncjs-tag
+  loader:
+    tag: <script async src="https://tags.crwdcntrl.net/lt/c/<lotameClientId>/sync.min.js"></script>
+    host: tags.crwdcntrl.net
+    cdn: AWS CloudFront
+    versioned: false
+  namespace: window.lotame_sync_<lotameClientId>
+  queue: cmd
+  config_options:
+  - name: lotameTagInput.onProfileReady
+    type: function
+  methods:
+  - name: sync
+    description: Trigger the ID sync call.
+  - name: setUserConsent
+    description: Manage consent flags (TCF 2.3 or Lotame Active Consent).
+  - name: getProfileId
+    description: Retrieve Lotame's device ID.
+  - name: getPanorama().getId()
+    description: Retrieve Lotame's people-based Panorama ID.
+integrations:
+  description: >-
+    Panorama ID is additionally distributed as a module inside third-party
+    header-bidding and publisher-signal frameworks rather than as a Lotame
+    package.
+  surfaces:
+  - name: Prebid.js Panorama ID user ID module
+    docs: https://my.lotame.com/category/prebid-google-esp-amazon-cxm
+    terms: https://www.lotame.com/wp-content/uploads/2024/11/2024.11.01_Prebid.org-Panorama-ID-Enrollment-Terms_lotame.pdf
+  - name: Google Encrypted Signals for Publishers (ESP)
+    docs: https://my.lotame.com/category/prebid-google-esp-amazon-cxm
+  - name: Amazon CxM
+    docs: https://my.lotame.com/category/prebid-google-esp-amazon-cxm
+    terms: https://www.lotame.com/wp-content/uploads/2024/11/2024.11.04_Amazon-CxM-Panorama-ID-Enrollment-Terms_lotame.pdf

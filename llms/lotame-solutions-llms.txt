@@ -8,21 +8,64 @@
 - [Panorama ID Server-Side API — Web](https://my.lotame.com/t/60ykhkw/server-side-panorama-id-api-for-web): Real-time POST to https://sid.crwdcntrl.net/sid returning a Panorama ID for an IP address and user-agent, identified by a static client_id with IAB TCF v2 or Lotame consent.
 - [Panorama ID Server-Side API — Mobile (MAIDs)](https://my.lotame.com/t/x2yf3d0/server-side-panorama-id-api-for-mobile-app-maids): Same server-side endpoint resolving a Panorama ID for a Mobile Advertiser ID (MAID).
 
+## Machine-readable contract
+
+- There is NO publicly retrievable OpenAPI or Swagger definition. Lotame runs a Swagger API Explorer at https://api.lotame.com/docs/, but every unauthenticated request for it — /docs/, /swagger.json, /openapi.json, /2/swagger.json, /2/openapi.json, /api-docs — returns 403 Forbidden or a 302 to https://api.lotame.com/saml2/authenticate/Lotame. The reference below is reconstructed from Lotame's own public documentation and example code.
+
+## Admin Services API resources
+
+Base: https://api.lotame.com/2/ — observed in Lotame's own example code at https://github.com/Lotame/api-examples.
+
+- Users: GET /users/activeUser
+- Behaviors: GET/POST /behaviors, GET /behaviors/{behavior_id}, GET /behaviors/ignored, PUT /behaviors/{behavior_id}/aliases
+- Audiences: GET/POST /audiences, GET/PUT /audiences/{audience_id}
+- Statistics: GET /statistics/behaviors/{behavior_id}, GET /statistics/behaviors/{behavior_id}/aggregated, GET /statistics/audiences
+- Reports: GET /reports/audiences/{audience_id}/profile/type/6, GET /reports/audiences/{audience_id}/publisher
+- Taxonomy: GET /hierarchies/{hierarchy_id}/nodes?depth=2, GET/PUT /hierarchies/nodes/{node_id}/categorizedBehaviors
+- Pixels: GET/PUT/DELETE /pixels/{pixel_id}
+- Campaigns: GET /campaigns/{campaign_id}, GET/POST /campaigns/{campaign_id}/interactions, DELETE /campaigns/{campaign_id}/interactions/{interaction_id}
+
 ## Authentication
 
-- Admin Services API: token-pair headers x-lotame-token + x-lotame-access, created in Spherical under Manage API Tokens. User tokens expire after 7 days (extendable to 31); Client API tokens last up to a year.
+- Admin Services API: token-pair headers x-lotame-token + x-lotame-access, created in Spherical under Manage API Tokens at https://platform.lotame.com/user/tokens. User tokens expire after 7 days (extendable to 31); Client API tokens last up to a year.
 - Panorama ID API: static integer client_id in the JSON body; per-request consent (GDPR/TCF v2 or lotame_consent) required.
+- Platform sign-in supports SAML 2.0 SSO; api.lotame.com redirects unauthenticated requests to https://api.lotame.com/saml2/authenticate/Lotame.
+
+## Client-side tags
+
+- [Lightning Tag (LT.js)](https://my.lotame.com/category/lightning-tag): `<script async src="https://tags.crwdcntrl.net/lt/c/<lotameClientId>/lt.min.js"></script>` — collect(), page(), setIdentity(), getPanorama(), getAudiences(), setUserConsent().
+- [Sync.js](https://my.lotame.com/category/lotame-syncjs-tag): `<script async src="https://tags.crwdcntrl.net/lt/c/<lotameClientId>/sync.min.js"></script>` — sync(), setUserConsent(), getProfileId(), getPanorama().getId().
+- Both are per-client bundles served from AWS CloudFront with no version in the URL.
+
+## SDKs and code
+
+- [LotameDMP (iOS, CocoaPods)](https://cocoapods.org/pods/LotameDMP) — 5.3.0, published 2021-07-28.
+- [com.lotame:cc-android-sdk (Android, Maven Central)](https://central.sonatype.com/artifact/com.lotame/cc-android-sdk) — 2.8.0.0, published 2025-02-17.
+- [Lotame/api-examples](https://github.com/Lotame/api-examples) — Python examples against the Admin Services API (examples, not a supported tool).
+- [Lotame/DataStream_Cookbook](https://github.com/Lotame/DataStream_Cookbook) — recipes for pulling and transforming Data Stream firehose files.
+- There is no first-party REST SDK on npm, PyPI, RubyGems, NuGet, crates.io or pkg.go.dev.
+
+## Limits and pricing
+
+- Rate limits exist but no numbers are published: "There are limits in place on api endpoints to ensure platform stability." No X-RateLimit-*, RateLimit-* or Retry-After header is documented. Remedy is a support ticket.
+- No plans, tiers or list prices are published; commercial terms are set by the Master Services Agreement.
+
+## Agent surfaces
+
+- No MCP server (hosted or stdio), no A2A agent card, and no /.well-known document on any Lotame host. platform.lotame.com answers 200 for every /.well-known/* path with the Spherical SPA HTML shell, which is not a document.
 
 ## Documentation
 
-- [API Explorer / Swagger](https://api.lotame.com/docs/): Interactive API reference (login required).
+- [API Explorer / Swagger](https://api.lotame.com/docs/): Interactive API reference (SAML login required).
 - [Administrative API docs](https://my.lotame.com/category/administrative-api)
 - [Panorama ID API docs](https://my.lotame.com/category/panorama-id-apis)
+- [Prebid, Google ESP & Amazon CxM](https://my.lotame.com/category/prebid-google-esp-amazon-cxm)
 - [Knowledge Base](https://my.lotame.com/)
 
 ## Company
 
 - [Website](https://www.lotame.com/)
+- [GitHub](https://github.com/Lotame)
 - [Resources / Blog](https://www.lotame.com/resources)
 - [Legal](https://www.lotame.com/legal/)
 - [Privacy Center](https://www.lotame.com/privacy)

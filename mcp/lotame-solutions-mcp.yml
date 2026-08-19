@@ -1,28 +1,111 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: derived
-source: derived from documented Lotame Admin Services API operations
+source: >-
+  Derived from documented Lotame Admin Services API operations at
+  https://my.lotame.com/t/35h37my/admin-services-api and the first-party example
+  code at https://github.com/Lotame/api-examples
 status: candidate
 name: Lotame Solutions MCP Server (candidate)
 notes: >-
-  No official hosted or remote MCP server was found for Lotame. The following is
-  a candidate tool list derived from documented Admin Services API operations to
-  guide a future MCP wrapper. Not published by Lotame.
+  No official hosted, remote or stdio MCP server exists for Lotame. Searches of
+  the Lotame GitHub organization (13 public repositories), npm, PyPI and the
+  Spherical knowledge base return nothing MCP-related. The tool list below is a
+  CANDIDATE derived from Admin Services API operations that Lotame's own
+  published example scripts actually call — it is not published by Lotame and
+  no endpoint is asserted. Input schemas cannot be derived faithfully because
+  Lotame's Swagger explorer (https://api.lotame.com/docs/) sits behind SAML
+  authentication; parameters below are only those visible in the example code.
 server:
   official: false
   url: null
   transport: null
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+  auth_note: >-
+    Any future server would authenticate with the Lotame token pair headers
+    x-lotame-token / x-lotame-access, created at
+    https://platform.lotame.com/user/tokens.
+  checked: '2026-08-13'
 tools:
 - name: get_active_user
-  description: Retrieve information about the authenticated user.
+  description: Retrieve information about the authenticated API user.
   http: GET /users/activeUser
+- name: list_behaviors
+  description: List behaviors for the account, optionally resolving aliases.
+  http: GET /behaviors?use_aliases=true
+- name: get_behavior
+  description: Retrieve a single behavior by id.
+  http: GET /behaviors/{behavior_id}
+- name: create_behavior
+  description: >-
+    Create a behavior from name, description, clientId and behaviorTypeId.
+  http: POST /behaviors?use_aliases=true
+- name: list_ignored_behaviors
+  description: List behaviors the account has marked as ignored.
+  http: GET /behaviors/ignored
+- name: update_behavior_aliases
+  description: Update the alias list on a behavior.
+  http: PUT /behaviors/{behavior_id}/aliases
 - name: get_behavior_statistics
   description: Retrieve statistics for a given behavior.
   http: GET /statistics/behaviors/{behavior_id}
+- name: get_behavior_statistics_aggregated
+  description: Retrieve aggregated (e.g. monthly unique) statistics for a behavior.
+  http: GET /statistics/behaviors/{behavior_id}/aggregated
 - name: get_audience_statistics
   description: Retrieve audience-level statistics.
   http: GET /statistics/audiences
+- name: list_audiences
+  description: List audiences for the account.
+  http: GET /audiences
+- name: get_audience
+  description: Retrieve a single audience and its behavior definition.
+  http: GET /audiences/{audience_id}
+- name: create_audience
+  description: >-
+    Create an audience from a boolean composition of behaviors (operator AND/OR,
+    uppercase), with overlapOnly and generate_apr flags.
+  http: POST /audiences
+- name: update_audience
+  description: >-
+    Replace or edit an audience definition — swap behaviors, add recency or
+    frequency qualifiers, toggle the Audience Profile Report.
+  http: PUT /audiences/{audience_id}
+- name: get_audience_profile_report
+  description: Retrieve the Audience Profile Report for an audience.
+  http: GET /reports/audiences/{audience_id}/profile/type/6
+- name: get_publisher_contribution_report
+  description: Retrieve the publisher contribution report for an audience.
+  http: GET /reports/audiences/{audience_id}/publisher
+- name: list_hierarchy_nodes
+  description: Walk taxonomy nodes for a hierarchy to a given depth.
+  http: GET /hierarchies/{hierarchy_id}/nodes?depth=2
+- name: get_node_categorized_behaviors
+  description: List the behaviors categorized under a taxonomy node.
+  http: GET /hierarchies/nodes/{node_id}/categorizedBehaviors
+- name: categorize_node_behaviors
+  description: Categorize or uncategorize behaviors under a taxonomy node.
+  http: PUT /hierarchies/nodes/{node_id}/categorizedBehaviors
+- name: manage_pixel
+  description: Retrieve, pause or delete a collection pixel.
+  http: GET|PUT|DELETE /pixels/{pixel_id}
+- name: list_campaign_interactions
+  description: List interactions defined on a campaign.
+  http: GET /campaigns/{campaign_id}/interactions
+- name: create_campaign_interaction
+  description: Create an interaction on a campaign.
+  http: POST /campaigns/{campaign_id}/interactions
+- name: delete_campaign_interaction
+  description: Delete an interaction from a campaign.
+  http: DELETE /campaigns/{campaign_id}/interactions/{interaction_id}
 - name: resolve_panorama_id
   description: >-
     Resolve a Panorama ID for an IP address and user-agent (web) or MAID
-    (mobile), with required consent signaling.
+    (mobile), with required IAB TCF or Lotame consent signaling.
   http: POST https://sid.crwdcntrl.net/sid
+tool_count: 23

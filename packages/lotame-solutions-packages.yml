@@ -1,0 +1,156 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://github.com/Lotame (first-party GitHub organization) +
+  https://trunk.cocoapods.org/api/v1/pods/LotameDMP +
+  https://repo1.maven.org/maven2/com/lotame/cc-android-sdk/maven-metadata.xml +
+  https://my.lotame.com/t/83hxvnt/lt-js-basic-implementation
+name: Lotame Solutions Client Libraries and Packages
+notes: >-
+  Lotame publishes its client libraries from the Lotame GitHub organization
+  (https://github.com/Lotame). There is NO first-party SDK for the Admin
+  Services REST API in any language registry — npm, PyPI, RubyGems, NuGet,
+  crates.io and pkg.go.dev return no Lotame-published package. The first-party
+  packages that do exist are data-collection SDKs for mobile apps and the
+  browser (Crowd Control / Lightning Tag), not API clients. Lotame instead ships
+  Python EXAMPLE code (github.com/Lotame/api-examples,
+  github.com/Lotame/DataStream_Cookbook) whose own README states it is "an
+  example, not an official Lotame-supported tool."
+packages:
+- name: LotameDMP
+  registry: cocoapods
+  url: https://cocoapods.org/pods/LotameDMP
+  repository: https://github.com/Lotame/LotameDMP-IOS
+  language: swift
+  platform: iOS
+  official: true
+  purpose: >-
+    Lotame DMP data collection from within an iOS application; also exposes the
+    Panorama ID / profile ID to the host app.
+  license: MIT
+  version: 5.3.0
+  published: '2021-07-28'
+  note: >-
+    Latest version published to the CocoaPods trunk is 5.3.0 (2021-07-28), seven
+    releases total since 3.0.0 in 2015. The LotameDMP.podspec on the repository
+    default branch declares 5.3.1 and git tags reach 5.3.0, so the podspec
+    version in source is AHEAD of anything a consumer can install from the
+    registry. Repository last pushed 2024-02-23.
+- name: com.lotame:cc-android-sdk
+  registry: maven-central
+  url: https://central.sonatype.com/artifact/com.lotame/cc-android-sdk
+  repository: https://github.com/Lotame/cc-android-sdk
+  language: java
+  platform: Android
+  official: true
+  purpose: >-
+    Crowd Control data collection from within an Android application (behaviors,
+    audiences, Panorama ID).
+  license: MIT
+  version: 2.8.0.0
+  published: '2025-02-17'
+  note: >-
+    Read from the Maven Central maven-metadata.xml (release 2.8.0.0,
+    lastUpdated 20250217185051). Eight versions published from 2.3.0.2 forward.
+    This is the most recently maintained first-party Lotame package. POM
+    developer is "Lotame" <info@lotame.com>, POM inception year 2025.
+- name: Lightning Tag (lt.min.js)
+  registry: cdn
+  url: https://tags.crwdcntrl.net/lt/c/<lotameClientId>/lt.min.js
+  language: javascript
+  platform: browser
+  official: true
+  purpose: >-
+    First-party browser data collection tag: collects behaviors, sets identity
+    (EMAIL / EMAIL_SHA256), reads audiences and returns the Panorama ID.
+  version: null
+  published: null
+  note: >-
+    CDN-distributed, and the URL carries NO version segment — it is keyed on the
+    customer's own <lotameClientId> and the bundle is, per Lotame's docs,
+    "dynamically generated for your implementation" and served from AWS
+    CloudFront. There is no registry metadata endpoint and no pinnable version,
+    so a consumer cannot determine which build they are executing. Recorded as
+    null deliberately: checked, nothing to record.
+- name: Sync.js (sync.min.js)
+  registry: cdn
+  url: https://tags.crwdcntrl.net/lt/c/<lotameClientId>/sync.min.js
+  language: javascript
+  platform: browser
+  official: true
+  purpose: First-party user ID syncing tag for cross-platform identity matching.
+  version: null
+  published: null
+  note: >-
+    Same unpinned per-client CloudFront distribution as the Lightning Tag; no
+    version in the URL and no registry metadata endpoint.
+- name: Lotame/cc-ios-sdk
+  registry: none
+  url: https://github.com/Lotame/cc-ios-sdk
+  language: objective-c
+  platform: iOS
+  official: true
+  purpose: Legacy Objective-C Crowd Control iOS collection library.
+  version: null
+  published: null
+  note: >-
+    Source-only; never published to CocoaPods trunk and carries no releases or
+    tags. Last pushed 2015-08-05 and superseded by the Swift LotameDMP-IOS
+    library. Recorded as null because there is no registry to query.
+third_party:
+- name: lotame
+  registry: pypi
+  url: https://pypi.org/project/lotame/
+  language: python
+  official: false
+  version: 2.0.0
+  published: '2021-07-22'
+  note: >-
+    Community wrapper for the Lotame Admin Services REST API by Paulo Kuong
+    (github.com/paulokuong/lotame). Not published or supported by Lotame.
+- name: lotame-sdk
+  registry: npm
+  url: https://www.npmjs.com/package/lotame-sdk
+  language: typescript
+  official: false
+  version: 1.0.1
+  published: '2026-03-13'
+  note: >-
+    Community TypeScript wrapper for the Lightning Tag with browser and SSR
+    helpers, published by npm user "dhaxor" from github.com/Dhaxor/lotame-sdk.
+    Not published or supported by Lotame.
+- name: react-native-lotame
+  registry: npm
+  url: https://www.npmjs.com/package/react-native-lotame
+  language: javascript
+  official: false
+  version: 4.0.0
+  published: '2020-04-22'
+  note: Community React Native bridge published by npm user "cisclub".
+- name: '@mangosoft/ionic-capacitor-lotame'
+  registry: npm
+  url: https://www.npmjs.com/package/@mangosoft/ionic-capacitor-lotame
+  language: typescript
+  official: false
+  version: 0.1.3
+  published: '2022-01-20'
+  note: >-
+    Community Ionic/Capacitor bridge over the native Lotame iOS and Android
+    SDKs, published by npm user "zerofractal".
+registries_checked:
+- registry: npm
+  result: no first-party package (3 community packages found)
+- registry: pypi
+  result: no first-party package (1 community wrapper found)
+- registry: maven-central
+  result: com.lotame:cc-android-sdk 2.8.0.0
+- registry: cocoapods
+  result: LotameDMP 5.3.0
+- registry: rubygems
+  result: none
+- registry: nuget
+  result: none
+- registry: crates.io
+  result: none
+- registry: pkg.go.dev
+  result: none

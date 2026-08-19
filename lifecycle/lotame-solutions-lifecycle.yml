@@ -1,6 +1,9 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://my.lotame.com/t/35h37my/admin-services-api
+source: >-
+  https://my.lotame.com/t/35h37my/admin-services-api +
+  https://trunk.cocoapods.org/api/v1/pods/LotameDMP +
+  https://repo1.maven.org/maven2/com/lotame/cc-android-sdk/maven-metadata.xml
 name: Lotame Solutions API Lifecycle
 versioning:
   scheme: uri-path-major
@@ -27,7 +30,48 @@ deprecation:
 status_page:
   url: null
   detail: No public status/uptime page was found for Lotame.
+changelog:
+  url: null
+  detail: >-
+    No dated changelog, release-notes page or version-history article exists in
+    the Lotame knowledge base. The Admin Services API article carries only a
+    relative "last updated" stamp, with no enumerated changes, so an integrator
+    cannot tell what changed or when.
 sla:
   detail: >-
     SLA terms are governed by the Master Services Agreement rather than a public
     document. See https://www.lotame.com/legal/.
+sdk_currency:
+  detail: >-
+    The published client libraries decay at very different rates, which is the
+    clearest lifecycle signal Lotame emits. Full inventory in
+    packages/lotame-solutions-packages.yml.
+  libraries:
+  - name: com.lotame:cc-android-sdk
+    registry: maven-central
+    version: 2.8.0.0
+    published: '2025-02-17'
+    state: current
+  - name: LotameDMP
+    registry: cocoapods
+    version: 5.3.0
+    published: '2021-07-28'
+    state: stale
+    note: >-
+      The podspec on the default branch declares 5.3.1, which was never
+      published to the CocoaPods trunk — the installable version trails the
+      source.
+  - name: Lotame/cc-ios-sdk
+    registry: none
+    version: null
+    published: null
+    state: superseded
+    note: Source-only, last pushed 2015-08-05; superseded by LotameDMP-IOS.
+  - name: Lightning Tag / Sync.js
+    registry: cdn
+    version: null
+    published: null
+    state: unpinned
+    note: >-
+      Per-client bundles served from tags.crwdcntrl.net with no version in the
+      URL, so neither Lotame nor the consumer can name a deployed version.
