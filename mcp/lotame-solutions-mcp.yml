@@ -1,36 +1,25 @@
 generated: '2026-08-13'
 method: derived
-source: >-
-  Derived from documented Lotame Admin Services API operations at
-  https://my.lotame.com/t/35h37my/admin-services-api and the first-party example
-  code at https://github.com/Lotame/api-examples
+source: Derived from documented Lotame Admin Services API operations at https://my.lotame.com/t/35h37my/admin-services-api
+  and the first-party example code at https://github.com/Lotame/api-examples
 status: candidate
 name: Lotame Solutions MCP Server (candidate)
-notes: >-
-  No official hosted, remote or stdio MCP server exists for Lotame. Searches of
-  the Lotame GitHub organization (13 public repositories), npm, PyPI and the
-  Spherical knowledge base return nothing MCP-related. The tool list below is a
-  CANDIDATE derived from Admin Services API operations that Lotame's own
-  published example scripts actually call — it is not published by Lotame and
-  no endpoint is asserted. Input schemas cannot be derived faithfully because
-  Lotame's Swagger explorer (https://api.lotame.com/docs/) sits behind SAML
-  authentication; parameters below are only those visible in the example code.
+notes: No official hosted, remote or stdio MCP server exists for Lotame. Searches of the Lotame GitHub
+  organization (13 public repositories), npm, PyPI and the Spherical knowledge base return nothing MCP-related.
+  The tool list below is a CANDIDATE derived from Admin Services API operations that Lotame's own published
+  example scripts actually call — it is not published by Lotame and no endpoint is asserted. Input schemas
+  cannot be derived faithfully because Lotame's Swagger explorer (https://api.lotame.com/docs/) sits behind
+  SAML authentication; parameters below are only those visible in the example code.
 server:
   official: false
   url: null
   transport: null
 deployment:
   mode: none
-  endpoint: null
-  install: null
-  package: null
-  auth: api-key
   verified: derived
-  auth_note: >-
-    Any future server would authenticate with the Lotame token pair headers
-    x-lotame-token / x-lotame-access, created at
-    https://platform.lotame.com/user/tokens.
-  checked: '2026-08-13'
+  tools: 4
+  checked: '2026-08-12'
+  source: catalog MCP census
 tools:
 - name: get_active_user
   description: Retrieve information about the authenticated API user.
@@ -42,8 +31,7 @@ tools:
   description: Retrieve a single behavior by id.
   http: GET /behaviors/{behavior_id}
 - name: create_behavior
-  description: >-
-    Create a behavior from name, description, clientId and behaviorTypeId.
+  description: Create a behavior from name, description, clientId and behaviorTypeId.
   http: POST /behaviors?use_aliases=true
 - name: list_ignored_behaviors
   description: List behaviors the account has marked as ignored.
@@ -67,14 +55,12 @@ tools:
   description: Retrieve a single audience and its behavior definition.
   http: GET /audiences/{audience_id}
 - name: create_audience
-  description: >-
-    Create an audience from a boolean composition of behaviors (operator AND/OR,
-    uppercase), with overlapOnly and generate_apr flags.
+  description: Create an audience from a boolean composition of behaviors (operator AND/OR, uppercase),
+    with overlapOnly and generate_apr flags.
   http: POST /audiences
 - name: update_audience
-  description: >-
-    Replace or edit an audience definition — swap behaviors, add recency or
-    frequency qualifiers, toggle the Audience Profile Report.
+  description: Replace or edit an audience definition — swap behaviors, add recency or frequency qualifiers,
+    toggle the Audience Profile Report.
   http: PUT /audiences/{audience_id}
 - name: get_audience_profile_report
   description: Retrieve the Audience Profile Report for an audience.
@@ -104,8 +90,7 @@ tools:
   description: Delete an interaction from a campaign.
   http: DELETE /campaigns/{campaign_id}/interactions/{interaction_id}
 - name: resolve_panorama_id
-  description: >-
-    Resolve a Panorama ID for an IP address and user-agent (web) or MAID
-    (mobile), with required IAB TCF or Lotame consent signaling.
+  description: Resolve a Panorama ID for an IP address and user-agent (web) or MAID (mobile), with required
+    IAB TCF or Lotame consent signaling.
   http: POST https://sid.crwdcntrl.net/sid
 tool_count: 23
