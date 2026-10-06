@@ -53,7 +53,7 @@ accessModel:
 specificationVersion: '0.23'
 image: https://cdn-ilbibgp.nitrocdn.com/eakWUVxgVLoymIJUurpQZcwTweYHDeju/assets/images/optimized/rev-6d2d189/www.lotame.com/wp-content/uploads/2025/05/lotame-website-favicon-300x300.png
 created: '2026-07-17'
-modified: '2026-08-13'
+modified: '2026-10-06'
 tags:
 - Company
 - Data Management Platform
@@ -107,6 +107,10 @@ apis:
   - type: ErrorCatalog
     url: errors/lotame-solutions-problem-types.yml
 common:
+- url: https://www.lotame.com/resources/
+  type: Blog
+- url: https://www.lotame.com/feed/
+  type: BlogRSS
 - type: Website
   url: https://www.lotame.com/
 - type: DeveloperPortal
