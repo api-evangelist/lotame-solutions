@@ -64,6 +64,112 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Lotame Solutions is a company surfaced as a portfolio company of battery-ventures and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Lotame Solutions is a data collaboration and identity company for digital marketing and advertising. Its Spherical platform lets marketers, agencies, and publishers connect, enrich, and activate first- and third-party audience data, while Panorama ID delivers a privacy-first, cookieless identity for addressability across web, mobile app, and CTV. Lotame exposes a token-based Admin Services REST API (api.lotame.com/2/) for managing first-party data, building audiences, and pulling behavior and audience statistics, plus a server-side Panorama ID resolution API on sid.crwdcntrl.net for web and mobile (MAID) identity lookups. Lotame operates across 24 countries and was acquired by Publicis Groupe.
 
-Backed by: battery-ventures
+**Areas:** Company · Data Management Platform · Identity · Advertising · Marketing · Audience Data · Data Collaboration · AdTech
+
+## Lotame Solutions on APIs.io
+
+Everything profiled for Lotame Solutions is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lotame-solutions/](https://apis.io/providers/lotame-solutions/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Lotame Admin Services API](https://apis.io/apis/lotame-solutions/lotame-admin-services-api/) — Token-based REST API for managing first-party data, building and editing audience segments, activating audiences, and retrieving behavior and audience…
+- [Panorama ID Server-Side API](https://apis.io/apis/lotame-solutions/panorama-id-server-side-api/) — Real-time server-side API that returns the assigned Panorama ID for an IP address and user-agent (web) or Mobile Advertiser ID / MAID (mobile app). JSON…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Lotame Solutions MCP Server (candidate)](https://apis.io/servers/lotame-solutions/lotame-solutions-mcp-server-candidate/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Lotame Solutions Authentication](https://apis.io/security/lotame-solutions/lotame-solutions-authentication/)
+- [Lotame Solutions Domain Security](https://apis.io/security/lotame-solutions/lotame-solutions-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Lotame Solutions Plans Pricing](https://apis.io/plans/lotame-solutions/lotame-solutions-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Lotame Solutions Rate Limits](https://apis.io/rate-limits/lotame-solutions/lotame-solutions-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.lotame.com/)
+- [Documentation](https://api.lotame.com/docs/)
+- [API reference](https://my.lotame.com/category/administrative-api)
+- [Sign up](https://my.lotame.com/signup)
+- [Support](https://www.cognitoforms.com/LotameSolutionsInc/SupportTicketForm)
+- [Blog](https://www.lotame.com/resources/)
+- [Compliance](https://www.lotame.com/legal/eu-privacy-consent-policy)
+- [Terms of service](https://www.lotame.com/legal/)
+- [Privacy policy](https://www.lotame.com/privacy)
+- [GitHub](https://github.com/Lotame)
+
+## API Evangelist rating
+
+**Kin Score 28.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 35.5 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lotame-solutions/](https://apis.io/providers/lotame-solutions/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Lotame Solutions: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lotame-solutions/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
